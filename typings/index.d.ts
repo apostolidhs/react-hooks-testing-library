@@ -23,4 +23,4 @@ export function renderHook<P, R>(
   options?: RenderHookOptions<P>
 ): RenderHookResult<P, R>
 
-export function cleanup(): void
+export function unmountAll(): void

@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
-import { renderHook, cleanup } from 'src'
+import { renderHook, unmountAll } from 'src'
 
-describe('cleanup tests', () => {
+describe('unmountAll tests', () => {
   let sideEffect = {}
 
   function useEffectsCounter({ initialProps }) {
@@ -25,24 +25,24 @@ describe('cleanup tests', () => {
     useEffectsCounter({ initialProps: { id: 10 } })
     useEffectsCounter({ initialProps: { id: 100 } })
 
-    cleanup()
+    unmountAll()
 
     expect(sideEffect).toEqual({ 1: 1, 10: 1, 100: 1 })
   })
 
-  test('should not cleanup a hook that have already unmounted', () => {
+  test('should not unmountAll a hook that have already unmounted', () => {
     const { unmount } = useEffectsCounter({ initialProps: { id: 1 } })
 
     unmount()
-    cleanup()
+    unmountAll()
 
     expect(sideEffect).toEqual({ 1: 1 })
   })
 
-  test('should not unmount a hook that have already cleaned up', () => {
+  test('should not unmount a hook that have already unmounted up', () => {
     const { unmount } = useEffectsCounter({ initialProps: { id: 1 } })
 
-    cleanup()
+    unmountAll()
     unmount()
 
     expect(sideEffect).toEqual({ 1: 1 })

@@ -1,1 +1,1 @@
-afterEach(require('./src').cleanup)
+afterEach(require('./lib').unmountAll)

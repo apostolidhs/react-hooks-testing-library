@@ -1,7 +1,7 @@
 import React, { Suspense } from 'react'
 import { act, create } from 'react-test-renderer'
 
-const unmounts = []
+let unmounts = []
 
 function TestHook({ callback, hookProps, onError, children }) {
   try {
@@ -53,9 +53,8 @@ function resultContainer() {
   }
 }
 
-function cleanup() {
+function unmountAll() {
   unmounts.forEach((unmount) => unmount())
-  unmounts.length = 0
 }
 
 function renderHook(callback, { initialProps, wrapper } = {}) {
@@ -82,6 +81,7 @@ function renderHook(callback, { initialProps, wrapper } = {}) {
 
   function unmountHook() {
     act(() => {
+      unmounts = unmounts.filter((u) => u !== unmountHook)
       unmount()
     })
   }
@@ -101,4 +101,4 @@ function renderHook(callback, { initialProps, wrapper } = {}) {
   }
 }
 
-export { renderHook, cleanup, act }
+export { renderHook, unmountAll, act }

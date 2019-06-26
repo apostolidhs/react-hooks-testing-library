@@ -126,12 +126,12 @@ npm install --save-dev react-test-renderer@^x.y.z
 Both of these dependecies must be installed as at least version `16.8.0` to be compatible with
 `react-hooks-testing-library`.
 
-### `cleanup()`
+### `unmountAll()`
 
 Unmounts any of the Hooks that were mounted with `renderHook`.
 
-Optionally, it is possible to import `cleanup` in a global test file. Using that way, it isn't
-necessary to run `afterEach(cleanup)` on every test script.
+Optionally, it is possible to import `unmountAll` in a global test file. Using that way, it isn't
+necessary to run `afterEach(unmountAll)` on every test script.
 
 ```js
 import 'react-hooks-testing-library/cleanup-after-each'
